@@ -76,19 +76,19 @@ function push(message = 'wip')
         {
             // done
             shell.echo("\nPushed to GITHBUB!\n")
+        }
 
-            // push to heroku?
-            if (RUN_HEROKU)
+        // push to heroku?
+        if (RUN_HEROKU)
+        {
+            if (!shell.which('heroku')) {
+                shell.echo('Sorry, this script requires heroku');
+                shell.exit(1);
+            }
+            else
             {
-                if (!shell.which('heroku')) {
-                    shell.echo('Sorry, this script requires heroku');
-                    shell.exit(1);
-                }
-                else
-                {
-                    shell.echo("Running deployment to HEROKU\n");
-                    if (shell.exec(`git push heroku main`).code === 0) shell.echo("\nPushed to HEROKU!\n");
-                }
+                shell.echo("Running deployment to HEROKU\n");
+                if (shell.exec(`git push heroku main`).code === 0) shell.echo("\nPushed to HEROKU!\n");
             }
         }
     }
